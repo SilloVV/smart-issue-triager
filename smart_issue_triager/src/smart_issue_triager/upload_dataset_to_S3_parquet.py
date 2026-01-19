@@ -30,7 +30,7 @@ def transfer_new_dataset():
         s3 = boto3.client("s3")
         s3.put_object(Bucket=BUCKET_NAME, Key=S3_KEY, Body=parquet_buffer.getvalue())
 
-        print("\n✨ Succès ! Le nouveau dataset est sur ton S3.")
+        print("\n✨ Succès ! Le nouveau dataset est sur S3.")
 
     except Exception as e:
         print(f"❌ Erreur : {e}")
