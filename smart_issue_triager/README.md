@@ -1,7 +1,7 @@
 # MLOps Project : Tickets Sorter 
 
 ##  Network Design ( Hybrid Cloud)
-![network architecture](smart_issue_triager\readme_images\architecture\network_architecture.png)
+![network architecture](smart_issue_triager/readme_images/architecture/network_architecture.png)
 
 ## Worflow 
 - Trunk-Basedd Development (tbd) : tbdflow tool 
