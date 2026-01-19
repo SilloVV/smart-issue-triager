@@ -3,41 +3,38 @@ import io
 from datasets import load_dataset
 
 
-def create_parquet_and_upload():
-    # 1. Configuration des noms
-    DATASET_NAME = "nerofinal012/TicketingToolDataset"
+def transfer_new_dataset():
+    # 1. Nouveau nom du dataset
+    DATASET_NAME = "gorkemsevinc/customer_support_tickets"
     BUCKET_NAME = "smart-issue-triager-storage-sillovv"
 
-    # On crée le "sous-dossier" en l'incluant dans le nom du fichier (Key)
-    S3_KEY = "datasets/ticketing-tool/jan_jul_2024.parquet"
+    # On change aussi le nom du dossier pour rester organisé
+    S3_KEY = "datasets/customer-support/tickets.parquet"
 
-    print("📥 Chargement du dataset depuis Hugging Face...")
+    print(f"📥 Chargement du dataset {DATASET_NAME}...")
     try:
-        # On charge le dataset (pense à avoir fait 'huggingface-cli login' avant)
+        # Pas besoin de token spécifique ici car c'est public
         dataset = load_dataset(DATASET_NAME, split="train")
 
-        # 2. Conversion en DataFrame Pandas
         df = dataset.to_pandas()
         print(f"✅ Données chargées : {len(df)} lignes.")
+        print(f"Colonnes disponibles : {list(df.columns)}")
 
-        # 3. Transformation en Parquet en mémoire (RAM)
+        # 2. Conversion en Parquet
         print("🔄 Conversion en format Parquet...")
         parquet_buffer = io.BytesIO()
         df.to_parquet(parquet_buffer, index=False, engine="pyarrow")
 
-        # 4. Connexion à S3 et Upload
+        # 3. Upload vers S3
         print(f"📤 Upload vers S3 : {BUCKET_NAME}/{S3_KEY}...")
         s3 = boto3.client("s3")
-
-        # .getvalue() récupère les octets du fichier Parquet
         s3.put_object(Bucket=BUCKET_NAME, Key=S3_KEY, Body=parquet_buffer.getvalue())
 
-        print("\n✨ Succès !")
-        print(f"Le fichier est disponible ici : s3://{BUCKET_NAME}/{S3_KEY}")
+        print("\n✨ Succès ! Le nouveau dataset est sur ton S3.")
 
     except Exception as e:
         print(f"❌ Erreur : {e}")
 
 
 if __name__ == "__main__":
-    create_parquet_and_upload()
+    transfer_new_dataset()
