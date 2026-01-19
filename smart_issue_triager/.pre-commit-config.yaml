@@ -28,3 +28,15 @@ repos:
       - id: terraform_fmt
       - id: terraform_validate
       - id: terraform_tflint
+
+ # 5 Tests unitaires pre commit
+    repos:
+    - repo: local
+      hooks:
+        - id: pytest
+          name: pytest
+          entry: uv run pytest
+          language: system
+          types: [python]
+          pass_filenames: false
+          always_run: true
