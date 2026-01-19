@@ -4,3 +4,4 @@ The idea is to sort issues ticket automatically by Machine Learning using Trunk-
 
 Datasets used :
 - Alinea, Arns Vhinzy C. (2024). Support Ticketing Data (January - July 2024). https://huggingface.co/datasets/nerofinal012/TicketingToolDataset. Hugging Face.
+ trunk
