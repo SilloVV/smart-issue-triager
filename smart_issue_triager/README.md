@@ -8,6 +8,7 @@
     --> Personne ne peut commit directement sur la branche trunk 
     --> Chacun doit créer une branche courte (<4h) puis faire une PR
 - uv --> Packaged App (Géré par Astral)
+- pre-commit verifications : linting (Python, YAML) + no commit on trunk branch
 
 
 ### Linting 
