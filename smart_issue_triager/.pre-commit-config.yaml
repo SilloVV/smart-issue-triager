@@ -1,0 +1,22 @@
+repos:
+  # 1. RUFF (Linter + Formatter) - Version maintenue par Astral
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.9
+    hooks:
+      - id: ruff
+        args: [ --fix ]
+      - id: ruff-format
+
+  # 2. YAMLLINT
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.33.0
+    hooks:
+      - id: yamllint
+        args: [-d, relaxed]
+
+  # 3. PROTECTION TRUNK (Pré-sécurité)
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: no-commit-to-branch
+        args: ['--branch', 'trunk']
