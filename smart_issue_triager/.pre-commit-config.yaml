@@ -20,3 +20,11 @@ repos:
     hooks:
       - id: no-commit-to-branch
         args: ['--branch', 'trunk']
+
+ # 4. Terraform files Linting
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.105.0
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_validate
+      - id: terraform_tflint
